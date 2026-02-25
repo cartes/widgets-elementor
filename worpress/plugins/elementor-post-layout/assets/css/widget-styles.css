@@ -955,6 +955,11 @@
    Multimedia Widget (Videos)
    ======================================== */
 
+/* Force full width on Elementor's internal widget container */
+.elementor-widget-elpl_multimedia_widget .elementor-widget-container {
+	width: 100%;
+}
+
 .elpl-multimedia-module {
 	width: 100%;
 	box-sizing: border-box;
