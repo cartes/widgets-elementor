@@ -957,34 +957,42 @@
 
 .elpl-multimedia-module {
 	width: 100%;
+	box-sizing: border-box;
 }
 
 .elpl-multimedia-grid {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 30px;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 .elpl-multimedia-card {
 	display: flex;
 	flex-direction: column;
+	box-sizing: border-box;
 }
 
-/* Columns logic using flex-basis */
+/* Columns logic using flex-basis (gap = 30px) */
 .elpl-cols-1 .elpl-multimedia-card {
 	flex: 0 0 100%;
+	max-width: 100%;
 }
 
 .elpl-cols-2 .elpl-multimedia-card {
 	flex: 0 0 calc(50% - 15px);
+	max-width: calc(50% - 15px);
 }
 
 .elpl-cols-3 .elpl-multimedia-card {
 	flex: 0 0 calc(33.333% - 20px);
+	max-width: calc(33.333% - 20px);
 }
 
 .elpl-cols-4 .elpl-multimedia-card {
 	flex: 0 0 calc(25% - 22.5px);
+	max-width: calc(25% - 22.5px);
 }
 
 .elpl-multimedia-link {
