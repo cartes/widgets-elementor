@@ -15,44 +15,6 @@
 	padding-right: 0;
 }
 
-/* ── Post Layout con Ads: visibilidad responsive ─────────────────────────── */
-
-/* Sección mobile: oculta por defecto en desktop */
-.elpl-layout-mobile-section {
-	display: none;
-	width: 100%;
-}
-
-/* Desktop ≥768px: mostrar bloque desktop, ocultar sección mobile */
-@media (min-width: 768px) {
-	.elpl-layout-desktop-only {
-		display: flex !important;
-	}
-
-	.elpl-layout-mobile-section {
-		display: none !important;
-	}
-}
-
-/* Mobile ≤767px: ocultar bloque desktop, mostrar sección mobile */
-@media (max-width: 767px) {
-	.elpl-layout-desktop-only {
-		display: none !important;
-	}
-
-	.elpl-layout-mobile-section {
-		display: block !important;
-	}
-
-	.elpl-layout-mobile-grid {
-		display: flex;
-		flex-direction: column;
-		gap: 0;
-		width: 100%;
-	}
-}
-
-
 /* ========================================
    Columns
    ======================================== */
@@ -350,52 +312,36 @@
 /* Common Meta */
 .elpl-post-date {
 	font-weight: 700;
-	font-size: 14px;
-	margin-bottom: 8px;
-	color: #e21a22;
+	font-size: 13px;
+	text-transform: uppercase;
+	margin-bottom: 5px;
+	color: #999;
 }
 
-/* Grid Posts (List Layout) */
+/* Grid Posts */
 .elpl-posts-grid {
 	display: grid;
-	gap: 25px;
+	gap: 20px;
 	align-items: start;
 }
 
 .elpl-grid-post {
 	display: flex;
 	flex-direction: column;
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 25px;
-}
-
-.elpl-grid-post:last-child {
-	border-bottom: none;
-	padding-bottom: 0;
 }
 
 .elpl-grid-image-link {
 	text-decoration: none;
 	color: inherit;
 	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	gap: 25px;
+	flex-direction: column;
 }
 
 .elpl-grid-image-container {
-	width: 40%;
+	width: 100%;
 	aspect-ratio: 16/9;
-	margin-bottom: 0;
+	margin-bottom: 15px;
 	overflow: hidden;
-	flex-shrink: 0;
-}
-
-.elpl-grid-content {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 }
 
 .elpl-grid-img {
@@ -407,15 +353,15 @@
 }
 
 .elpl-grid-image-link:hover .elpl-grid-img {
-	transform: scale(1.05);
+	transform: scale(1.1);
 }
 
 .elpl-grid-title {
 	margin: 0;
-	font-size: 22px;
+	font-size: 18px;
 	line-height: 1.3;
 	font-weight: 700;
-	color: #000;
+	color: #333;
 }
 
 /* Grid Excerpt */
@@ -429,117 +375,13 @@
 /* Destacados Responsive */
 @media (max-width: 768px) {
 	.elpl-posts-grid {
-		grid-template-columns: 1fr !important;
-	}
-
-	.elpl-grid-image-container {
-		width: 45%;
-	}
-
-	.elpl-grid-title {
-		font-size: 18px;
+		grid-template-columns: repeat(2, 1fr) !important;
 	}
 }
 
 @media (max-width: 480px) {
-	.elpl-grid-image-link {
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 15px;
-	}
-
-	.elpl-grid-image-container {
-		width: 100%;
-	}
-}
-
-/* Load More Button — all widgets (mobile only) */
-.elpl-load-more-wrap {
-	display: none;
-	/* hidden on desktop */
-}
-
-/* Noticias: wrapper outside flex module — oculto en desktop, visible solo en mobile */
-.elpl-ng-mobile-section {
-	display: none;
-	width: 100%;
-}
-
-/* Desktop: garantizar que la sección mobile no aparece en pantallas grandes */
-@media (min-width: 768px) {
-	.elpl-ng-mobile-section {
-		display: none !important;
-	}
-
-	.elpl-noticias-generales-module {
-		display: flex !important;
-	}
-}
-
-.elpl-load-more-btn {
-	display: inline-block;
-	padding: 12px 20px;
-	background: #e21a22;
-	color: #fff;
-	font-size: 14px;
-	font-weight: 700;
-	text-align: center;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: background 0.2s ease;
-}
-
-/* ── Load More Spinner ────────────────────────────────────────────────────── */
-@keyframes elpl-spin {
-	to {
-		transform: rotate(360deg);
-	}
-}
-
-.elpl-loading-spinner {
-	display: none;
-	width: 100%;
-	padding: 20px 0;
-	text-align: center;
-}
-
-.elpl-loading-spinner::after {
-	content: '';
-	display: inline-block;
-	width: 28px;
-	height: 28px;
-	border-radius: 50%;
-	border: 3px solid rgba(226, 26, 34, 0.2);
-	border-top-color: #e21a22;
-	animation: elpl-spin 0.7s linear infinite;
-}
-
-@media (max-width: 768px) {
-	.elpl-load-more-wrap {
-		display: block;
-		margin-top: 20px;
-		text-align: center;
-		/* default, overridden by Elementor control */
-	}
-
-
-	.elpl-load-more-btn:hover:not(:disabled) {
-		background: #c0151c;
-	}
-
-	.elpl-load-more-btn:disabled {
-		opacity: 0.5;
-		cursor: wait;
-	}
-
-	.elpl-load-more-btn.elpl-no-more {
-		display: none !important;
-	}
-
-	.elpl-loading-spinner {
-		display: none;
-		/* controlled by JS */
+	.elpl-posts-grid {
+		grid-template-columns: 1fr !important;
 	}
 }
 
@@ -817,16 +659,14 @@
 	border: 1px solid #eee;
 }
 
-.elpl-ng-list-col .elpl-ng-title,
-.elpl-ng-mobile-more .elpl-ng-title {
+.elpl-ng-list-col .elpl-ng-title {
 	margin: 0;
 	font-size: 16px;
 	line-height: 1.3;
 	font-weight: 700;
 }
 
-.elpl-ng-list-col .elpl-ng-title a,
-.elpl-ng-mobile-more .elpl-ng-title a {
+.elpl-ng-list-col .elpl-ng-title a {
 	color: #E30613;
 	text-decoration: none;
 }
@@ -843,17 +683,6 @@
 }
 
 @media (max-width: 767px) {
-
-	/* Ocultar completamente el módulo desktop en mobile.
-	   La sección mobile (elpl-ng-mobile-section) es independiente y tiene sus propios posts. */
-	.elpl-noticias-generales-module {
-		display: none !important;
-	}
-
-	/* Mostrar la sección mobile */
-	.elpl-ng-mobile-section {
-		display: block !important;
-	}
 
 	/* Las tarjetas destacadas pasan a formato lista horizontal */
 	.elpl-ng-featured-grid {
@@ -909,35 +738,6 @@
 	}
 }
 
-/* Noticias: contenedor de posts cargados via "load more" (mobile only) */
-.elpl-ng-mobile-more {
-	display: none;
-	/* oculto en desktop */
-}
-
-@media (max-width: 767px) {
-	.elpl-ng-mobile-more {
-		display: flex;
-		flex-direction: column;
-		gap: 0;
-		width: 100%;
-		margin-top: 15px;
-	}
-
-	/* Cards dentro del contenedor reutilizan .elpl-ng-list-card */
-	.elpl-ng-mobile-more .elpl-ng-list-card {
-		border-bottom: 1px solid #eee;
-		padding-bottom: 15px;
-		margin-bottom: 15px;
-	}
-
-	.elpl-ng-mobile-more .elpl-ng-list-card:last-child {
-		border-bottom: none;
-		padding-bottom: 0;
-		margin-bottom: 0;
-	}
-}
-
 /* ========================================
    Opinion Widget (2 Columns)
    ======================================== */
@@ -945,37 +745,6 @@
 	width: 100%;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
-
-/* Desktop: visible en ≥768px, oculto en móvil */
-.elpl-opinion-desktop {
-	display: block;
-}
-
-/* Mobile: visible solo en ≤767px */
-.elpl-opinion-mobile {
-	display: none;
-}
-
-@media (min-width: 768px) {
-	.elpl-opinion-desktop {
-		display: block !important;
-	}
-
-	.elpl-opinion-mobile {
-		display: none !important;
-	}
-}
-
-@media (max-width: 767px) {
-	.elpl-opinion-desktop {
-		display: none !important;
-	}
-
-	.elpl-opinion-mobile {
-		display: block !important;
-	}
-}
-
 
 .elpl-opinion-header {
 	display: flex;
@@ -1192,30 +961,6 @@
 	}
 }
 
-/* Opinion: contenedor de posts cargados vía "load more" (mobile only) */
-/* Las tarjetas dentro heredan todos sus estilos del bloque @media 767px general */
-.elpl-opinion-mobile-more {
-	display: none;
-}
-
-@media (max-width: 767px) {
-	.elpl-opinion-mobile-more {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 25px;
-		width: 100%;
-		border-top: 1px solid #ddd;
-		padding-top: 25px;
-		margin-top: 0;
-	}
-
-	/* La última tarjeta cargada tampoco debe llevar borde ni padding inferior */
-	.elpl-opinion-mobile-more .elpl-opinion-card:last-child {
-		border-bottom: none;
-		padding-bottom: 0;
-	}
-}
-
 /* ========================================
    Universal Posts Widget (Grilla de Contenidos)
    ======================================== */
@@ -1315,38 +1060,13 @@
 	}
 }
 
-/* Universal: contenedor de posts cargados vía "load more" (mobile only) */
-.elpl-universal-mobile-more {
-	display: none;
-}
-
-@media (max-width: 767px) {
-	.elpl-universal-mobile-more {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 30px;
-		width: 100%;
-		border-top: 1px solid #eee;
-		padding-top: 30px;
-		margin-top: 0;
-	}
-
-	/* Cards dentro se comportan igual que en el grid */
-	.elpl-universal-mobile-more .elpl-universal-card {
-		flex: 0 0 100% !important;
-	}
-}
-
 /* ========================================
    Multimedia Widget (Videos)
    ======================================== */
 
 /* Force full width on Elementor's internal widget container */
-.elementor.elementor .e-con>.elementor-widget.elementor-widget-elpl_multimedia_widget,
-.elementor-widget-elpl_multimedia_widget,
 .elementor-widget-elpl_multimedia_widget .elementor-widget-container {
-	width: 100% !important;
-	max-width: 100% !important;
+	width: 100%;
 }
 
 .elpl-multimedia-module {
@@ -1356,6 +1076,7 @@
 
 .elpl-multimedia-grid {
 	--elpl-media-cols: 2;
+	/* Por defecto 2 columnas */
 	display: grid;
 	grid-template-columns: repeat(var(--elpl-media-cols), 1fr);
 	gap: 30px;
@@ -1379,16 +1100,12 @@
 	display: flex;
 	flex-direction: column;
 	box-sizing: border-box;
-	/* Overriding Elementor legacy generic classes in parent */
-	flex: 1 1 auto !important;
-	max-width: 100% !important;
 }
 
 .elpl-multimedia-link {
 	text-decoration: none;
 	color: inherit;
-	display: flex;
-	flex-direction: column;
+	display: block;
 }
 
 .elpl-multimedia-thumbnail {
@@ -1398,8 +1115,6 @@
 	overflow: hidden;
 	background: #000;
 	margin-bottom: 12px;
-	flex-shrink: 0;
-	/* nunca comprimir el thumbnail en flex */
 }
 
 .elpl-multimedia-thumbnail img {
@@ -1455,8 +1170,6 @@
 
 .elpl-multimedia-content {
 	padding: 0;
-	flex-shrink: 0;
-	/* el texto nunca queda comprimido ni sobre el thumbnail */
 }
 
 .elpl-multimedia-title {
@@ -1474,401 +1187,16 @@
 	margin: 0;
 }
 
-/* Multimedia: contenedor de posts cargados vía "load more" (mobile only) */
-.elpl-multimedia-mobile-more {
-	display: none;
+@media (max-width: 1024px) {
+
+	.elpl-cols-3 .elpl-multimedia-card,
+	.elpl-cols-4 .elpl-multimedia-card {
+		flex: 0 0 calc(50% - 15px);
+	}
 }
 
 @media (max-width: 767px) {
-	.elpl-multimedia-mobile-more {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 30px;
-		width: 100%;
-		border-top: 1px solid #eee;
-		padding-top: 30px;
-		margin-top: 0;
+	.elpl-multimedia-card {
+		flex: 0 0 100% !important;
 	}
-
-	.elpl-multimedia-title {
-		line-height: 1.2rem !important;
-	}
-
-	/* Ocultar la paginación numérica en mobile (se usa load-more en su lugar) */
-	.elpl-pagination {
-		display: none;
-	}
-}
-
-/* ==========================================================================
-   WIDGET: DESTACADOS TOP
-   (1 Featured + Grid)
-   ========================================================================== */
-
-/* Contenedor principal */
-.elpl-top-module {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-}
-
-/* Bloque Destacado Principal */
-.elpl-top-featured {
-	margin-bottom: 40px;
-}
-
-.elpl-top-feat-wrapper {
-	display: flex;
-	/* flex-direction is controlled exclusively by the Elementor responsive control */
-	gap: 20px;
-	align-items: flex-start;
-}
-
-.elpl-top-feat-img-link {
-	flex: 0 0 370px;
-	max-width: 370px;
-	display: block;
-	overflow: hidden;
-}
-
-.elpl-top-feat-img {
-	width: 100%;
-	height: 250px;
-	/* Custom height controllable by Elementor */
-	object-fit: cover;
-	display: block;
-	transition: transform 0.3s ease;
-}
-
-.elpl-top-feat-img-link:hover .elpl-top-feat-img {
-	transform: scale(1.03);
-}
-
-.elpl-top-feat-body {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 0 10px;
-}
-
-.elpl-top-feat-date {
-	color: #B70015;
-	font-size: 14px;
-	font-weight: 900;
-	margin-bottom: 12px;
-}
-
-.elpl-top-feat-title {
-	margin: 0 0 15px 0;
-	font-size: 21px;
-	line-height: 1.2;
-	font-weight: 700;
-}
-
-.elpl-top-feat-title a {
-	color: inherit;
-	text-decoration: none;
-	transition: color 0.2s ease;
-}
-
-.elpl-top-feat-title a:hover {
-	color: #B70015;
-}
-
-.elpl-top-feat-excerpt {
-	margin: 0;
-	font-size: 16px;
-	line-height: 1.6;
-	color: #555;
-	font-weight: 400;
-}
-
-/* Grilla Inferior */
-.elpl-top-module .elpl-top-grid {
-	display: grid !important;
-	gap: 20px;
-	/* controllable by Elementor */
-	align-items: start;
-}
-
-.elpl-top-module .elpl-top-grid-cols-1 {
-	grid-template-columns: 1fr !important;
-}
-
-.elpl-top-module .elpl-top-grid-cols-2 {
-	grid-template-columns: repeat(2, 1fr) !important;
-}
-
-.elpl-top-module .elpl-top-grid-cols-3 {
-	grid-template-columns: repeat(3, 1fr) !important;
-}
-
-.elpl-top-module .elpl-top-grid-cols-4 {
-	grid-template-columns: repeat(4, 1fr) !important;
-}
-
-.elpl-top-module .elpl-top-grid-cols-5 {
-	grid-template-columns: repeat(5, 1fr) !important;
-}
-
-.elpl-top-post {
-	display: flex;
-	flex-direction: column;
-	background: #fff;
-}
-
-.elpl-top-post-link {
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-	text-decoration: none;
-	color: inherit;
-	gap: 12px;
-	align-items: flex-start;
-}
-
-.elpl-top-post-link:hover .elpl-top-post-title {
-	color: #B70015;
-}
-
-.elpl-top-post-image {
-	overflow: hidden;
-	flex-shrink: 0;
-	width: 100%;
-	/* columna: imagen full-width */
-	max-width: 100%;
-}
-
-/* En layout horizontal (row/row-reverse), el texto ocupa el espacio restante */
-.elpl-top-post-text {
-	flex: 1;
-	min-width: 0;
-}
-
-.elpl-top-post-thumb {
-	width: 100%;
-	height: 220px;
-	/* controllable by Elementor */
-	object-fit: cover;
-	display: block;
-	transition: transform 0.3s ease;
-}
-
-.elpl-top-post-link:hover .elpl-top-post-thumb {
-	transform: scale(1.05);
-}
-
-.elpl-top-post-date {
-	color: #B70015;
-	font-size: 13px;
-	font-weight: 700;
-	margin-bottom: 8px;
-	text-transform: uppercase;
-}
-
-.elpl-top-post-title {
-	margin: 0;
-	font-size: 18px;
-	font-weight: 700;
-	line-height: 1.35;
-	transition: color 0.2s ease;
-}
-
-/* Extracto de posts secundarios — oculto por defecto, visible via control Elementor */
-.elpl-top-post-excerpt {
-	display: none;
-	margin: 6px 0 0;
-	font-size: 14px;
-	line-height: 1.55;
-	color: #555;
-	font-weight: 400;
-}
-
-/* ── ESTILOS MOBILE (767px y abajo) ───────────────────────────────── */
-@media (max-width: 767px) {
-
-	/* Featured en Mobile */
-	.elpl-top-feat-wrapper {
-		/* flex-direction set by Elementor responsive control (mobile_default: column) */
-		gap: 15px;
-	}
-
-	.elpl-top-feat-img-link {
-		flex: unset;
-		max-width: 100%;
-		width: 100%;
-	}
-
-	.elpl-top-feat-img {
-		height: 200px;
-	}
-
-	.elpl-top-feat-body {
-		padding: 0;
-	}
-
-	.elpl-top-feat-date {
-		margin-bottom: 8px;
-	}
-
-	.elpl-top-feat-title {
-		font-size: 24px;
-		margin-bottom: 12px;
-	}
-
-	.elpl-top-feat-excerpt {
-		font-size: 15px;
-	}
-
-	.elpl-top-featured {
-		margin-bottom: 30px;
-	}
-
-	/* Grilla en Mobile */
-	.elpl-top-module .elpl-top-grid {
-		grid-template-columns: 1fr !important;
-		/* Fuerza 1 columna en teléfonos (a menos que se quiera otra cosa, pero por defecto 1) */
-		gap: 25px;
-	}
-
-	.elpl-top-post-thumb {
-		height: 180px;
-	}
-
-	.elpl-top-post-title {
-		font-size: 16px;
-	}
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-
-	/* Grilla en Tablets */
-	.elpl-top-module .elpl-top-grid-cols-3,
-	.elpl-top-module .elpl-top-grid-cols-4,
-	.elpl-top-module .elpl-top-grid-cols-5 {
-		grid-template-columns: repeat(2, 1fr) !important;
-	}
-}
-/* ============================================================
-   ELPL Mobile Nav Widget
-   ============================================================ */
-
-.elpl-mnav {
-    width: 100%;
-}
-
-.elpl-mnav-list,
-.elpl-mnav-submenu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-/* ── Top-level items ─────────────────────────────────────── */
-
-.elpl-mnav-item {
-    margin-bottom: 16px;
-}
-
-/* Plain link items (no children) */
-.elpl-mnav-item > a {
-    display: inline-block;
-    font-weight: 700;
-    text-decoration: none;
-    line-height: 1.2;
-    transition: opacity 0.15s;
-}
-
-.elpl-mnav-item > a:hover {
-    opacity: 0.75;
-}
-
-/* ── Accordion toggle (items with children) ──────────────── */
-
-.elpl-mnav-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 16px;
-    border: 1.5px solid #1a1a1a;
-    border-radius: 8px;
-    cursor: pointer;
-    user-select: none;
-    transition: background-color 0.15s;
-}
-
-.elpl-mnav-toggle:hover {
-    background-color: rgba(0, 0, 0, 0.03);
-}
-
-.elpl-mnav-label {
-    font-weight: 700;
-    text-decoration: none;
-    color: inherit;
-    flex: 1;
-}
-
-/* ⊕ / ⊖ icon drawn with pure CSS */
-.elpl-mnav-icon {
-    position: relative;
-    width: 22px;
-    height: 22px;
-    border: 1.5px solid #1a1a1a;
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-left: 12px;
-}
-
-.elpl-mnav-icon::before,
-.elpl-mnav-icon::after {
-    content: '';
-    position: absolute;
-    background: currentColor;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.2s, transform 0.2s;
-}
-
-/* horizontal bar */
-.elpl-mnav-icon::before {
-    width: 10px;
-    height: 1.5px;
-}
-
-/* vertical bar (becomes invisible when open) */
-.elpl-mnav-icon::after {
-    width: 1.5px;
-    height: 10px;
-}
-
-.elpl-mnav-toggle.elpl-mnav-open .elpl-mnav-icon::after {
-    transform: translate(-50%, -50%) rotate(90deg);
-    opacity: 0;
-}
-
-/* ── Submenu ─────────────────────────────────────────────── */
-
-.elpl-mnav-submenu {
-    padding: 8px 0 0 16px;
-}
-
-.elpl-mnav-submenu[hidden] {
-    display: none;
-}
-
-.elpl-mnav-sub-item {
-    margin-bottom: 10px;
-}
-
-.elpl-mnav-sub-item a {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 0.92em;
-    transition: opacity 0.15s;
-}
-
-.elpl-mnav-sub-item a:hover {
-    opacity: 0.7;
 }

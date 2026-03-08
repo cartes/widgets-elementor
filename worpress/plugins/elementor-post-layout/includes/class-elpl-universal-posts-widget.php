@@ -131,6 +131,18 @@ class ELPL_Universal_Posts_Widget extends \Elementor\Widget_Base
             ]
         );
 
+        $this->add_control(
+            'mobile_batch',
+            [
+                'label'     => esc_html__('Posts por carga (Mobile)', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::NUMBER,
+                'default'   => 4,
+                'min'       => 1,
+                'max'       => 20,
+                'separator' => 'before',
+            ]
+        );
+
         $this->end_controls_section();
 
         // Style Section
@@ -151,6 +163,132 @@ class ELPL_Universal_Posts_Widget extends \Elementor\Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .elpl-universal-date' => 'color: {{VALUE}};',
                 ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Load More Button Style Section
+        $this->start_controls_section(
+            'style_section_load_more',
+            [
+                'label' => esc_html__('Botón Cargar Más (Mobile)', 'elementor-post-layout'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'lm_align',
+            [
+                'label'   => esc_html__('Alineación', 'elementor-post-layout'),
+                'type'    => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'left'   => ['title' => esc_html__('Izquierda', 'elementor-post-layout'), 'icon' => 'eicon-text-align-left'],
+                    'center' => ['title' => esc_html__('Centro',    'elementor-post-layout'), 'icon' => 'eicon-text-align-center'],
+                    'right'  => ['title' => esc_html__('Derecha',   'elementor-post-layout'), 'icon' => 'eicon-text-align-right'],
+                ],
+                'default'   => 'center',
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-wrap' => 'text-align: {{VALUE}};'],
+            ]
+        );
+
+        $this->start_controls_tabs('lm_tabs');
+
+        $this->start_controls_tab('lm_tab_normal', ['label' => esc_html__('Normal', 'elementor-post-layout')]);
+
+        $this->add_control(
+            'lm_text_color',
+            [
+                'label'     => esc_html__('Color de Texto', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-btn' => 'color: {{VALUE}};'],
+            ]
+        );
+
+        $this->add_control(
+            'lm_bg_color',
+            [
+                'label'     => esc_html__('Color de Fondo', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-btn' => 'background-color: {{VALUE}};'],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab('lm_tab_hover', ['label' => esc_html__('Hover', 'elementor-post-layout')]);
+
+        $this->add_control(
+            'lm_text_color_hover',
+            [
+                'label'     => esc_html__('Color de Texto', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-btn:hover' => 'color: {{VALUE}};'],
+            ]
+        );
+
+        $this->add_control(
+            'lm_bg_color_hover',
+            [
+                'label'     => esc_html__('Color de Fondo', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-btn:hover' => 'background-color: {{VALUE}};'],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'lm_typography',
+                'label'    => esc_html__('Tipografía', 'elementor-post-layout'),
+                'selector' => '{{WRAPPER}} .elpl-load-more-btn',
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name'     => 'lm_border',
+                'selector' => '{{WRAPPER}} .elpl-load-more-btn',
+            ]
+        );
+
+        $this->add_control(
+            'lm_border_radius',
+            [
+                'label'      => esc_html__('Radio de Borde', 'elementor-post-layout'),
+                'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'lm_padding',
+            [
+                'label'      => esc_html__('Padding', 'elementor-post-layout'),
+                'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'lm_margin_top',
+            [
+                'label'     => esc_html__('Margen Superior del Bloque', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::SLIDER,
+                'range'     => ['px' => ['min' => 0, 'max' => 100]],
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-wrap' => 'margin-top: {{SIZE}}px;'],
+                'default'   => ['size' => 20],
             ]
         );
 
@@ -184,7 +322,7 @@ class ELPL_Universal_Posts_Widget extends \Elementor\Widget_Base
         }
         ?>
 
-        <div class="elpl-universal-module elpl-cols-<?php echo esc_attr($cols); ?>">
+        <div class="elpl-universal-module elpl-cols-<?php echo esc_attr($cols); ?>" data-elpl-module="1">
             <div class="elpl-universal-grid">
                 <?php
                 while ($query->have_posts()):
@@ -216,8 +354,44 @@ class ELPL_Universal_Posts_Widget extends \Elementor\Widget_Base
                 endwhile;
                 wp_reset_postdata();
                 ?>
+            </div><!-- .elpl-universal-grid -->
+
+            <?php
+            // ── "Cargar más" — mobile only ────────────────────────────────
+            $mobile_batch  = absint($settings['mobile_batch'] ?? 4);
+            $button_offset = $num_posts;
+
+            $more_check_args = [
+                'post_type'      => $post_type,
+                'posts_per_page' => 1,
+                'offset'         => $button_offset,
+                'post_status'    => 'publish',
+                'fields'         => 'ids',
+                'no_found_rows'  => false,
+            ];
+            if ('post' === $post_type && !empty($settings['category_id'])) {
+                $more_check_args['cat'] = absint($settings['category_id']);
+            }
+            $more_check    = new \WP_Query($more_check_args);
+            $no_more_class = $more_check->have_posts() ? '' : ' elpl-no-more';
+            wp_reset_postdata();
+            ?>
+            <div class="elpl-universal-mobile-more"></div>
+            <div class="elpl-load-more-wrap">
+                <button class="elpl-load-more-btn<?php echo esc_attr($no_more_class); ?>"
+                    data-widget="elpl_universal_posts_widget"
+                    data-grid=".elpl-universal-mobile-more"
+                    data-post-type="<?php echo esc_attr($post_type); ?>"
+                    data-category-id="<?php echo esc_attr($settings['category_id'] ?? ''); ?>"
+                    data-per-page="<?php echo esc_attr($mobile_batch); ?>"
+                    data-offset="<?php echo esc_attr($button_offset); ?>"
+                    data-show-image="<?php echo esc_attr($settings['show_image'] ?? 'yes'); ?>"
+                    data-show-date="<?php echo esc_attr($settings['show_date'] ?? 'yes'); ?>">
+                    <?php esc_html_e('Cargar más', 'elementor-post-layout'); ?>
+                </button>
             </div>
-        </div>
+
+        </div><!-- .elpl-universal-module -->
         <?php
     }
 

@@ -104,6 +104,18 @@ class ELPL_Archive_Destacado_Widget extends \Elementor\Widget_Base
             ]
         );
 
+        $this->add_control(
+            'mobile_batch',
+            [
+                'label' => esc_html__('Posts por carga (Mobile)', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 20,
+                'default' => 3,
+                'description' => esc_html__('Cantidad de posts que se cargan al pulsar "Cargar más" en mobile.', 'elementor-post-layout'),
+            ]
+        );
+
         $this->end_controls_section();
 
         // --- STYLE SECTION (Main Post) ---
@@ -201,6 +213,177 @@ class ELPL_Archive_Destacado_Widget extends \Elementor\Widget_Base
         );
 
         $this->end_controls_section();
+
+        // ── Estilo: Botón de Paginación (Mobile) ─────────────────────────────
+        $this->start_controls_section(
+            'style_section_load_more',
+            array(
+                'label' => esc_html__('Botón Cargar Más (Mobile)', 'elementor-post-layout'),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            )
+        );
+
+        $this->start_controls_tabs('load_more_btn_tabs');
+
+        $this->start_controls_tab(
+            'load_more_btn_normal',
+            array('label' => esc_html__('Normal', 'elementor-post-layout'))
+        );
+
+        $this->add_control(
+            'load_more_color',
+            array(
+                'label' => esc_html__('Color de Texto', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'color: {{VALUE}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'load_more_bg_color',
+            array(
+                'label' => esc_html__('Color de Fondo', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#e21a22',
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'background-color: {{VALUE}};',
+                ),
+            )
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'load_more_btn_hover',
+            array('label' => esc_html__('Hover', 'elementor-post-layout'))
+        );
+
+        $this->add_control(
+            'load_more_color_hover',
+            array(
+                'label' => esc_html__('Color de Texto', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn:hover' => 'color: {{VALUE}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'load_more_bg_color_hover',
+            array(
+                'label' => esc_html__('Color de Fondo', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#c0151c',
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn:hover' => 'background-color: {{VALUE}};',
+                ),
+            )
+        );
+
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            array(
+                'name' => 'load_more_typography',
+                'selector' => '{{WRAPPER}} .elpl-load-more-btn',
+            )
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            array(
+                'name' => 'load_more_border',
+                'selector' => '{{WRAPPER}} .elpl-load-more-btn',
+            )
+        );
+
+        $this->add_control(
+            'load_more_border_radius',
+            array(
+                'label' => esc_html__('Radio de Borde', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => array('px', '%'),
+                'default' => array(
+                    'top' => 4,
+                    'right' => 4,
+                    'bottom' => 4,
+                    'left' => 4,
+                    'unit' => 'px',
+                ),
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'load_more_padding',
+            array(
+                'label' => esc_html__('Padding', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => array('px', 'em'),
+                'default' => array(
+                    'top' => 12,
+                    'right' => 20,
+                    'bottom' => 12,
+                    'left' => 20,
+                    'unit' => 'px',
+                ),
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'load_more_margin_top',
+            array(
+                'label' => esc_html__('Margen Superior', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => array('px'),
+                'range' => array(
+                    'px' => array('min' => 0, 'max' => 80),
+                ),
+                'default' => array('unit' => 'px', 'size' => 20),
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-wrap' => 'margin-top: {{SIZE}}{{UNIT}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'load_more_alignment',
+            array(
+                'label' => esc_html__('Alineación (Mobile)', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => array(
+                    'left' => array(
+                        'title' => esc_html__('Izquierda', 'elementor-post-layout'),
+                        'icon' => 'eicon-text-align-left',
+                    ),
+                    'center' => array(
+                        'title' => esc_html__('Centrado', 'elementor-post-layout'),
+                        'icon' => 'eicon-text-align-center',
+                    ),
+                    'right' => array(
+                        'title' => esc_html__('Derecha', 'elementor-post-layout'),
+                        'icon' => 'eicon-text-align-right',
+                    ),
+                ),
+                'default' => 'center',
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-wrap' => 'text-align: {{VALUE}};',
+                ),
+            )
+        );
+
+        $this->end_controls_section();
     }
 
     protected function render()
@@ -219,19 +402,27 @@ class ELPL_Archive_Destacado_Widget extends \Elementor\Widget_Base
         ];
 
         // Context detection
+        $taxonomy_slug = '';
+        $term_id = 0;
+        $author_id = 0;
+
         if (is_category() || is_tag() || is_tax()) {
             $obj = get_queried_object();
+            $taxonomy_slug = $obj->taxonomy;
+            $term_id = $obj->term_id;
+
             $query_args['tax_query'] = [
                 [
-                    'taxonomy' => $obj->taxonomy,
+                    'taxonomy' => $taxonomy_slug,
                     'field' => 'term_id',
-                    'terms' => $obj->term_id,
+                    'terms' => $term_id,
                 ],
             ];
         } elseif (is_post_type_archive()) {
             $query_args['post_type'] = get_query_var('post_type');
         } elseif (is_author()) {
-            $query_args['author'] = get_queried_object_id();
+            $author_id = get_queried_object_id();
+            $query_args['author'] = $author_id;
         } else {
             $query_args['post_type'] = 'post';
         }
@@ -244,8 +435,20 @@ class ELPL_Archive_Destacado_Widget extends \Elementor\Widget_Base
         }
 
         $counter = 0;
+        
+        $mobile_batch = !empty($settings['mobile_batch']) ? absint($settings['mobile_batch']) : 3;
+
+        // Check if there are more posts beyond the initially loaded ones
+        $more_check_args = $query_args;
+        $more_check_args['posts_per_page'] = 1;
+        $more_check_args['offset'] = $query_args['offset'] + $ppp;
+        $more_check_args['fields'] = 'ids';
+        $more_check = new \WP_Query($more_check_args);
+        $no_more_class = $more_check->have_posts() ? '' : ' elpl-no-more';
+        wp_reset_postdata();
+
         ?>
-        <div class="elpl-archive-destacado-module">
+        <div class="elpl-archive-destacado-module" data-elpl-module="1">
             <div class="elpl-destacado-grid">
                 <?php while ($query->have_posts()):
                     $query->the_post();
@@ -287,9 +490,22 @@ class ELPL_Archive_Destacado_Widget extends \Elementor\Widget_Base
                         <?php endif; ?>
                     <?php endwhile;
                 wp_reset_postdata(); ?>
-                    <?php if ($counter > 1)
-                        echo '</div>'; ?>
+                    <?php if ($counter > 1) {
+                        echo '</div>'; 
+                    } ?>
                 </div>
+            </div>
+
+            <div class="elpl-load-more-wrap">
+                <button class="elpl-load-more-btn<?php echo esc_attr($no_more_class); ?>" data-widget="elpl_archive_destacado_widget"
+                    data-grid=".elpl-destacado-side" data-category=""
+                    data-per-page="<?php echo esc_attr($mobile_batch); ?>"
+                    data-offset="<?php echo esc_attr($query_args['offset'] + $ppp); ?>" data-show-date="no" data-show-excerpt="no"
+                    data-taxonomy="<?php echo esc_attr($taxonomy_slug); ?>"
+                    data-term-id="<?php echo esc_attr($term_id); ?>"
+                    data-author-id="<?php echo esc_attr($author_id); ?>">
+                    <?php esc_html_e('Cargar más', 'elementor-post-layout'); ?>
+                </button>
             </div>
 
             <style>
@@ -350,6 +566,7 @@ class ELPL_Archive_Destacado_Widget extends \Elementor\Widget_Base
 
                     .elpl-destacado-side {
                         flex-direction: row;
+                        flex-wrap: wrap;
                         gap: 20px !important;
                     }
 
@@ -361,10 +578,17 @@ class ELPL_Archive_Destacado_Widget extends \Elementor\Widget_Base
                 @media (max-width: 767px) {
                     .elpl-destacado-side {
                         flex-direction: column;
+                        flex-wrap: nowrap;
                     }
 
                     .elpl-destacado-side article {
                         width: 100%;
+                    }
+                }
+                
+                @media (min-width: 768px) {
+                    .elpl-archive-destacado-module .elpl-load-more-wrap {
+                        display: none !important;
                     }
                 }
             </style>

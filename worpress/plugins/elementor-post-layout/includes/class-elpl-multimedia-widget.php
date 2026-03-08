@@ -69,18 +69,23 @@ class ELPL_Multimedia_Widget extends \Elementor\Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'columns',
             [
                 'label' => esc_html__('Columnas', 'elementor-post-layout'),
                 'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => '2',
+                'tablet_default' => '2',
+                'mobile_default' => '1',
                 'options' => [
                     '1' => '1',
                     '2' => '2',
                     '3' => '3',
                     '4' => '4',
                 ],
-                'default' => '2',
+                'selectors' => [
+                    '{{WRAPPER}} .elpl-multimedia-grid' => '--elpl-media-cols: {{VALUE}};',
+                ],
             ]
         );
 
@@ -93,6 +98,29 @@ class ELPL_Multimedia_Widget extends \Elementor\Widget_Base
                 'label_off' => esc_html__('No', 'elementor-post-layout'),
                 'default' => 'no',
                 'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'mobile_initial_posts',
+            [
+                'label'   => esc_html__('Posts iniciales (Mobile)', 'elementor-post-layout'),
+                'type'    => \Elementor\Controls_Manager::NUMBER,
+                'default' => 3,
+                'min'     => 1,
+                'max'     => 20,
+                'description' => esc_html__('Número de posts visibles al cargar en mobile. El resto se revelan con "Cargar más".', 'elementor-post-layout'),
+            ]
+        );
+
+        $this->add_control(
+            'mobile_batch',
+            [
+                'label'   => esc_html__('Posts por carga (Mobile)', 'elementor-post-layout'),
+                'type'    => \Elementor\Controls_Manager::NUMBER,
+                'default' => 4,
+                'min'     => 1,
+                'max'     => 20,
             ]
         );
 
@@ -277,6 +305,132 @@ class ELPL_Multimedia_Widget extends \Elementor\Widget_Base
         $this->end_controls_tabs();
 
         $this->end_controls_section();
+
+        // Load More Button Style Section
+        $this->start_controls_section(
+            'style_section_load_more',
+            [
+                'label' => esc_html__('Botón Cargar Más (Mobile)', 'elementor-post-layout'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'lm_align',
+            [
+                'label'   => esc_html__('Alineación', 'elementor-post-layout'),
+                'type'    => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'left'   => ['title' => esc_html__('Izquierda', 'elementor-post-layout'), 'icon' => 'eicon-text-align-left'],
+                    'center' => ['title' => esc_html__('Centro',    'elementor-post-layout'), 'icon' => 'eicon-text-align-center'],
+                    'right'  => ['title' => esc_html__('Derecha',   'elementor-post-layout'), 'icon' => 'eicon-text-align-right'],
+                ],
+                'default'   => 'center',
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-wrap' => 'text-align: {{VALUE}};'],
+            ]
+        );
+
+        $this->start_controls_tabs('lm_tabs');
+
+        $this->start_controls_tab('lm_tab_normal', ['label' => esc_html__('Normal', 'elementor-post-layout')]);
+
+        $this->add_control(
+            'lm_text_color',
+            [
+                'label'     => esc_html__('Color de Texto', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-btn' => 'color: {{VALUE}};'],
+            ]
+        );
+
+        $this->add_control(
+            'lm_bg_color',
+            [
+                'label'     => esc_html__('Color de Fondo', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-btn' => 'background-color: {{VALUE}};'],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab('lm_tab_hover', ['label' => esc_html__('Hover', 'elementor-post-layout')]);
+
+        $this->add_control(
+            'lm_text_color_hover',
+            [
+                'label'     => esc_html__('Color de Texto', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-btn:hover' => 'color: {{VALUE}};'],
+            ]
+        );
+
+        $this->add_control(
+            'lm_bg_color_hover',
+            [
+                'label'     => esc_html__('Color de Fondo', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-btn:hover' => 'background-color: {{VALUE}};'],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'lm_typography',
+                'label'    => esc_html__('Tipografía', 'elementor-post-layout'),
+                'selector' => '{{WRAPPER}} .elpl-load-more-btn',
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name'     => 'lm_border',
+                'selector' => '{{WRAPPER}} .elpl-load-more-btn',
+            ]
+        );
+
+        $this->add_control(
+            'lm_border_radius',
+            [
+                'label'      => esc_html__('Radio de Borde', 'elementor-post-layout'),
+                'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'lm_padding',
+            [
+                'label'      => esc_html__('Padding', 'elementor-post-layout'),
+                'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'lm_margin_top',
+            [
+                'label'     => esc_html__('Margen Superior del Bloque', 'elementor-post-layout'),
+                'type'      => \Elementor\Controls_Manager::SLIDER,
+                'range'     => ['px' => ['min' => 0, 'max' => 100]],
+                'selectors' => ['{{WRAPPER}} .elpl-load-more-wrap' => 'margin-top: {{SIZE}}px;'],
+                'default'   => ['size' => 20],
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     protected function render()
@@ -286,7 +440,8 @@ class ELPL_Multimedia_Widget extends \Elementor\Widget_Base
         $cols = !empty($settings['columns']) ? absint($settings['columns']) : 2;
         $is_pagination_active = ($settings['show_pagination'] === 'yes');
 
-        $num_posts = !empty($settings['posts_per_page']) ? absint($settings['posts_per_page']) : 6;
+        $num_posts      = !empty($settings['posts_per_page']) ? absint($settings['posts_per_page']) : 6;
+        $mobile_initial = !empty($settings['mobile_initial_posts']) ? absint($settings['mobile_initial_posts']) : 3;
         $paged = 1;
 
         if ($is_pagination_active) {
@@ -313,15 +468,25 @@ class ELPL_Multimedia_Widget extends \Elementor\Widget_Base
             return;
         }
         ?>
+        <?php if ($mobile_initial < $num_posts): ?>
+        <style>
+        @media(max-width:767px) {
+            .elementor-element-<?php echo esc_attr($this->get_id()); ?> .elpl-multimedia-card.elpl-top-post--m-hidden { display: none; }
+        }
+        </style>
+        <?php endif; ?>
 
-        <div class="elpl-multimedia-module elpl-cols-<?php echo esc_attr($cols); ?>">
+        <div class="elpl-multimedia-module" data-elpl-module="1">
             <div class="elpl-multimedia-grid">
                 <?php
+                $post_idx = 0;
                 while ($query->have_posts()):
                     $query->the_post();
+                    $post_idx++;
+                    $hidden_cls = ($post_idx > $mobile_initial) ? ' elpl-top-post--m-hidden' : '';
                     $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'medium');
                     ?>
-                    <article class="elpl-multimedia-card">
+                    <article class="elpl-multimedia-card<?php echo esc_attr($hidden_cls); ?>">
                         <a href="<?php the_permalink(); ?>" class="elpl-multimedia-link">
                             <div class="elpl-multimedia-thumbnail">
                                 <?php if ($thumbnail): ?>
@@ -400,15 +565,48 @@ class ELPL_Multimedia_Widget extends \Elementor\Widget_Base
                     }
                 </style>
             <?php endif; ?>
-        </div>
+
+            <?php
+            // ── "Cargar más" — mobile only ────────────────────────────────
+            $mobile_batch  = absint($settings['mobile_batch'] ?? 4);
+            $hidden_count  = max(0, $num_posts - $mobile_initial);
+            $button_offset = $num_posts;
+
+            $more_check    = new \WP_Query([
+                'post_type'      => $post_type,
+                'posts_per_page' => 1,
+                'offset'         => $button_offset,
+                'post_status'    => 'publish',
+                'fields'         => 'ids',
+                'no_found_rows'  => false,
+            ]);
+            $has_db_more   = $more_check->have_posts() ? 'true' : 'false';
+            $no_more_class = (!$more_check->have_posts() && $hidden_count <= 0) ? ' elpl-no-more' : '';
+            wp_reset_postdata();
+            ?>
+            <div class="elpl-multimedia-mobile-more"></div>
+            <div class="elpl-load-more-wrap">
+                <button class="elpl-load-more-btn<?php echo esc_attr($no_more_class); ?>"
+                    data-widget="elpl_multimedia_widget"
+                    data-grid=".elpl-multimedia-grid"
+                    data-post-type="<?php echo esc_attr($post_type); ?>"
+                    data-per-page="<?php echo esc_attr($mobile_batch); ?>"
+                    data-offset="<?php echo esc_attr($button_offset); ?>"
+                    data-hidden-count="<?php echo esc_attr($hidden_count); ?>"
+                    data-has-db-more="<?php echo esc_attr($has_db_more); ?>">
+                    <?php esc_html_e('Cargar más', 'elementor-post-layout'); ?>
+                </button>
+            </div>
+
+        </div><!-- .elpl-multimedia-module -->
         <?php
     }
 
     protected function _content_template()
     {
         ?>
-        <# var cols=settings.columns || 2; var num=settings.posts_per_page || 6; #>
-            <div class="elpl-multimedia-module elpl-cols-{{ cols }} elpl-editor-preview">
+        <# var num=settings.posts_per_page || 6; #>
+            <div class="elpl-multimedia-module elpl-editor-preview">
                 <div class="elpl-multimedia-grid">
                     <# for ( var i=0; i < num; i++ ) { #>
                         <div class="elpl-multimedia-card">

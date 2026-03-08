@@ -111,6 +111,62 @@ class ELPL_Noticias_Generales_Widget extends \Elementor\Widget_Base
             )
         );
 
+        $this->add_control(
+            'mobile_batch',
+            array(
+                'label' => esc_html__('Posts por carga (Mobile)', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 20,
+                'default' => 4,
+                'description' => esc_html__('Cantidad de posts que se cargan al pulsar "Cargar más" en mobile.', 'elementor-post-layout'),
+            )
+        );
+
+        $this->add_control(
+            'num_posts_mobile',
+            array(
+                'label' => esc_html__('Posts iniciales (Mobile)', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 30,
+                'default' => 6,
+                'description' => esc_html__('Cantidad de posts visibles al cargar la página en mobile. Solo afecta mobile — el desktop siempre muestra su diseño fijo.', 'elementor-post-layout'),
+            )
+        );
+
+        $this->add_control(
+            'meta_data',
+            [
+                'label' => esc_html__('Metadatos', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::SELECT2,
+                'multiple' => true,
+                'default' => ['date', 'comments'],
+                'options' => [
+                    'author' => esc_html__('Autor', 'elementor-post-layout'),
+                    'date' => esc_html__('Fecha', 'elementor-post-layout'),
+                    'time' => esc_html__('Hora', 'elementor-post-layout'),
+                    'comments' => esc_html__('Comentarios', 'elementor-post-layout'),
+                    'modified' => esc_html__('Fecha de Modificación', 'elementor-post-layout'),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'meta_separator',
+            [
+                'label' => esc_html__('Separador', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => '///',
+                'selectors' => [
+                    '{{WRAPPER}} .elpl-ng-meta span + span:before' => 'content: "{{VALUE}}"; padding: 0 4px;',
+                ],
+                'condition' => [
+                    'meta_data!' => [],
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         // Style Section
@@ -123,13 +179,89 @@ class ELPL_Noticias_Generales_Widget extends \Elementor\Widget_Base
         );
 
         $this->add_control(
+            'heading_title_style',
+            array(
+                'label' => esc_html__('Título', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+            )
+        );
+
+        $this->add_responsive_control(
             'title_color',
             array(
-                'label' => esc_html__('Color de Títulos', 'elementor-post-layout'),
+                'label' => esc_html__('Color', 'elementor-post-layout'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => array(
-                    '{{WRAPPER}} .elpl-ng-title a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .elpl-ng-title, {{WRAPPER}} .elpl-ng-title a' => 'color: {{VALUE}};',
                 ),
+            )
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            array(
+                'name' => 'title_typography',
+                'selector' => '{{WRAPPER}} .elpl-ng-title, {{WRAPPER}} .elpl-ng-title a',
+            )
+        );
+
+        $this->add_responsive_control(
+            'title_spacing',
+            array(
+                'label' => esc_html__('Espaciado', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => array(
+                    'px' => array(
+                        'min' => 0,
+                        'max' => 100,
+                    ),
+                ),
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-ng-title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'heading_meta_style',
+            array(
+                'label' => esc_html__('Metadatos', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+            )
+        );
+
+        $this->add_responsive_control(
+            'meta_color',
+            array(
+                'label' => esc_html__('Color', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-ng-meta' => 'color: {{VALUE}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'meta_separator_color',
+            array(
+                'label' => esc_html__('Color del Separador', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-ng-meta span + span:before' => 'color: {{VALUE}};',
+                ),
+                'condition' => [
+                    'meta_data!' => [],
+                ],
+            )
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            array(
+                'name' => 'meta_typography',
+                'selector' => '{{WRAPPER}} .elpl-ng-meta',
             )
         );
 
@@ -143,6 +275,177 @@ class ELPL_Noticias_Generales_Widget extends \Elementor\Widget_Base
                 ),
                 'condition' => array(
                     'show_excerpt' => 'yes',
+                ),
+            )
+        );
+
+        $this->end_controls_section();
+
+        // ── Estilo: Botón de Paginación (Mobile) ─────────────────────────────
+        $this->start_controls_section(
+            'style_section_load_more',
+            array(
+                'label' => esc_html__('Botón de Paginación (Mobile)', 'elementor-post-layout'),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            )
+        );
+
+        $this->start_controls_tabs('load_more_btn_tabs');
+
+        $this->start_controls_tab(
+            'load_more_btn_normal',
+            array('label' => esc_html__('Normal', 'elementor-post-layout'))
+        );
+
+        $this->add_control(
+            'load_more_color',
+            array(
+                'label' => esc_html__('Color de Texto', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'color: {{VALUE}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'load_more_bg_color',
+            array(
+                'label' => esc_html__('Color de Fondo', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#e21a22',
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'background-color: {{VALUE}};',
+                ),
+            )
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'load_more_btn_hover',
+            array('label' => esc_html__('Hover', 'elementor-post-layout'))
+        );
+
+        $this->add_control(
+            'load_more_color_hover',
+            array(
+                'label' => esc_html__('Color de Texto', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn:hover' => 'color: {{VALUE}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'load_more_bg_color_hover',
+            array(
+                'label' => esc_html__('Color de Fondo', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#c0151c',
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn:hover' => 'background-color: {{VALUE}};',
+                ),
+            )
+        );
+
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            array(
+                'name' => 'load_more_typography',
+                'selector' => '{{WRAPPER}} .elpl-load-more-btn',
+            )
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            array(
+                'name' => 'load_more_border',
+                'selector' => '{{WRAPPER}} .elpl-load-more-btn',
+            )
+        );
+
+        $this->add_control(
+            'load_more_border_radius',
+            array(
+                'label' => esc_html__('Radio de Borde', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => array('px', '%'),
+                'default' => array(
+                    'top' => 4,
+                    'right' => 4,
+                    'bottom' => 4,
+                    'left' => 4,
+                    'unit' => 'px',
+                ),
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'load_more_padding',
+            array(
+                'label' => esc_html__('Padding', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => array('px', 'em'),
+                'default' => array(
+                    'top' => 12,
+                    'right' => 20,
+                    'bottom' => 12,
+                    'left' => 20,
+                    'unit' => 'px',
+                ),
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'load_more_margin_top',
+            array(
+                'label' => esc_html__('Margen Superior', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => array('px'),
+                'range' => array(
+                    'px' => array('min' => 0, 'max' => 80),
+                ),
+                'default' => array('unit' => 'px', 'size' => 20),
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-wrap' => 'margin-top: {{SIZE}}{{UNIT}};',
+                ),
+            )
+        );
+
+        $this->add_control(
+            'load_more_alignment',
+            array(
+                'label' => esc_html__('Alineación (Mobile)', 'elementor-post-layout'),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => array(
+                    'left' => array(
+                        'title' => esc_html__('Izquierda', 'elementor-post-layout'),
+                        'icon' => 'eicon-text-align-left',
+                    ),
+                    'center' => array(
+                        'title' => esc_html__('Centrado', 'elementor-post-layout'),
+                        'icon' => 'eicon-text-align-center',
+                    ),
+                    'right' => array(
+                        'title' => esc_html__('Derecha', 'elementor-post-layout'),
+                        'icon' => 'eicon-text-align-right',
+                    ),
+                ),
+                'default' => 'center',
+                'selectors' => array(
+                    '{{WRAPPER}} .elpl-load-more-wrap' => 'text-align: {{VALUE}};',
                 ),
             )
         );
@@ -166,6 +469,44 @@ class ELPL_Noticias_Generales_Widget extends \Elementor\Widget_Base
     }
 
     /**
+     * Render Meta Data
+     */
+    protected function render_meta_data($post)
+    {
+        $settings = $this->get_settings_for_display();
+        if (empty($settings['meta_data'])) {
+            return;
+        }
+        ?>
+        <div class="elpl-ng-meta" style="font-size: 0.85em; margin-bottom: 8px;">
+            <?php
+            foreach ($settings['meta_data'] as $meta) {
+                echo '<span class="elpl-ng-meta-' . esc_attr($meta) . '">';
+                switch ($meta) {
+                    case 'author':
+                        echo esc_html(get_the_author_meta('display_name', $post->post_author));
+                        break;
+                    case 'date':
+                        echo esc_html(get_the_date('', $post->ID));
+                        break;
+                    case 'time':
+                        echo esc_html(get_the_time('', $post->ID));
+                        break;
+                    case 'comments':
+                        echo esc_html(get_comments_number($post->ID));
+                        break;
+                    case 'modified':
+                        echo esc_html(get_the_modified_date('', $post->ID));
+                        break;
+                }
+                echo '</span>';
+            }
+            ?>
+        </div>
+        <?php
+    }
+
+    /**
      * Render widget output on the frontend.
      *
      * @since 1.5.7
@@ -174,87 +515,143 @@ class ELPL_Noticias_Generales_Widget extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        $mobile_batch = absint($settings['mobile_batch'] ?? 4);
+        $num_posts_mobile = max(1, absint($settings['num_posts_mobile'] ?? 6));
+        $category_val = $settings['posts_category'] ?? '';
 
-        $args = array(
+        // ══════════════════════════════════════════════════════════════════════
+        // DESKTOP: query fija de 6 posts — NO TOCAR BAJO NINGUNA CIRCUNSTANCIA
+        // ══════════════════════════════════════════════════════════════════════
+        $desktop_args = array(
             'post_type' => 'post',
             'posts_per_page' => 6,
         );
-
-        if (!empty($settings['posts_category'])) {
-            $args['category_name'] = $settings['posts_category'];
+        if (!empty($category_val)) {
+            $desktop_args['category_name'] = $category_val;
         }
+        $desktop_query = new \WP_Query($desktop_args);
 
-        $query = new \WP_Query($args);
-
-        if ($query->have_posts()) {
-            $posts = $query->posts;
+        if ($desktop_query->have_posts()) {
+            $posts = $desktop_query->posts;
             $featured_posts = array_slice($posts, 0, 2);
             $list_posts = array_slice($posts, 2, 4);
-            $is_reversed = 'yes' === $settings['reverse_columns'] ? ' elpl-ng-reversed' : '';
+            $is_reversed = ('yes' === $settings['reverse_columns']) ? ' elpl-ng-reversed' : '';
             ?>
             <div class="elpl-noticias-generales-module<?php echo esc_attr($is_reversed); ?>">
 
                 <!-- Column 1: Featured (2 posts) -->
                 <div class="elpl-ng-column elpl-ng-featured-col">
                     <div class="elpl-ng-featured-grid">
-                        <?php
-                        foreach ($featured_posts as $post) {
+                        <?php foreach ($featured_posts as $post):
                             setup_postdata($post);
-                            $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'medium_large');
-                            ?>
+                            $thumb = get_the_post_thumbnail_url($post->ID, 'medium_large'); ?>
                             <div class="elpl-ng-card elpl-ng-featured-card">
                                 <a href="<?php echo esc_url(get_permalink($post->ID)); ?>" class="elpl-ng-thumb-link">
-                                    <div class="elpl-ng-thumbnail"
-                                        style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');"></div>
+                                    <div class="elpl-ng-thumbnail" style="background-image: url('<?php echo esc_url($thumb); ?>');">
+                                    </div>
                                 </a>
                                 <div class="elpl-ng-content">
-                                    <h3 class="elpl-ng-title"><a href="<?php echo esc_url(get_permalink($post->ID)); ?>">
-                                            <?php echo esc_html($post->post_title); ?>
-                                        </a></h3>
+                                    <h3 class="elpl-ng-title"><a
+                                            href="<?php echo esc_url(get_permalink($post->ID)); ?>"><?php echo esc_html($post->post_title); ?></a>
+                                    </h3>
+                                    <?php $this->render_meta_data($post); ?>
                                     <?php if ('yes' === $settings['show_excerpt']): ?>
-                                        <div class="elpl-ng-excerpt">
-                                            <?php echo esc_html(wp_trim_words(get_the_excerpt($post->ID), 25)); ?>
+                                        <div class="elpl-ng-excerpt"><?php echo esc_html(wp_trim_words(get_the_excerpt($post->ID), 25)); ?>
                                         </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <?php
-                        }
-                        wp_reset_postdata();
-                        ?>
+                        <?php endforeach;
+                        wp_reset_postdata(); ?>
                     </div>
                 </div>
 
                 <!-- Column 2: List (4 posts) -->
                 <div class="elpl-ng-column elpl-ng-list-col">
                     <div class="elpl-ng-list">
-                        <?php
-                        foreach ($list_posts as $post) {
+                        <?php foreach ($list_posts as $post):
                             setup_postdata($post);
-                            $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'thumbnail');
-                            ?>
+                            $thumb = get_the_post_thumbnail_url($post->ID, 'thumbnail'); ?>
                             <div class="elpl-ng-card elpl-ng-list-card">
                                 <a href="<?php echo esc_url(get_permalink($post->ID)); ?>" class="elpl-ng-list-thumb">
-                                    <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php echo esc_attr($post->post_title); ?>">
+                                    <img src="<?php echo esc_url($thumb); ?>" alt="<?php echo esc_attr($post->post_title); ?>">
                                 </a>
                                 <div class="elpl-ng-list-content">
-                                    <h4 class="elpl-ng-title"><a href="<?php echo esc_url(get_permalink($post->ID)); ?>">
-                                            <?php echo esc_html($post->post_title); ?>
-                                        </a></h4>
+                                    <h4 class="elpl-ng-title"><a
+                                            href="<?php echo esc_url(get_permalink($post->ID)); ?>"><?php echo esc_html($post->post_title); ?></a>
+                                    </h4>
+                                    <?php $this->render_meta_data($post); ?>
                                 </div>
                             </div>
-                            <?php
-                        }
-                        wp_reset_postdata();
-                        ?>
+                        <?php endforeach;
+                        wp_reset_postdata(); ?>
                     </div>
                 </div>
 
-            </div>
+            </div><!-- .elpl-noticias-generales-module -->
             <?php
-        } else {
-            echo esc_html__('No se encontraron noticias.', 'elementor-post-layout');
         }
+
+        // ══════════════════════════════════════════════════════════════════════
+        // MOBILE: query INDEPENDIENTE con num_posts_mobile posts.
+        // Visible solo en ≤767px (display:none en desktop via CSS global).
+        // El módulo desktop (.elpl-noticias-generales-module) se oculta
+        // en mobile via la regla CSS global agregada en widget-styles.css.
+        // ══════════════════════════════════════════════════════════════════════
+        $mobile_args = array(
+            'post_type' => 'post',
+            'posts_per_page' => $num_posts_mobile,
+        );
+        if (!empty($category_val)) {
+            $mobile_args['category_name'] = $category_val;
+        }
+        $mobile_query = new \WP_Query($mobile_args);
+
+        // Verificar si hay más posts en BD tras num_posts_mobile
+        $more_check_args = array(
+            'post_type' => 'post',
+            'posts_per_page' => 1,
+            'offset' => $num_posts_mobile,
+            'post_status' => 'publish',
+            'fields' => 'ids',
+        );
+        if (!empty($category_val)) {
+            $more_check_args['category_name'] = $category_val;
+        }
+        $more_check = new \WP_Query($more_check_args);
+        $no_more_class = $more_check->have_posts() ? '' : ' elpl-no-more';
+        wp_reset_postdata();
+        ?>
+        <div class="elpl-ng-mobile-section" data-elpl-module="1">
+            <div class="elpl-ng-mobile-more">
+                <?php if ($mobile_query->have_posts()):
+                    while ($mobile_query->have_posts()):
+                        $mobile_query->the_post();
+                        $thumb = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail'); ?>
+                        <div class="elpl-ng-card elpl-ng-list-card">
+                            <a href="<?php the_permalink(); ?>" class="elpl-ng-list-thumb">
+                                <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>">
+                            </a>
+                            <div class="elpl-ng-list-content">
+                                <?php $this->render_meta_data($post); ?>
+                                <h4 class="elpl-ng-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+                            </div>
+                        </div>
+                    <?php endwhile;
+                    wp_reset_postdata();
+                endif; ?>
+            </div><!-- .elpl-ng-mobile-more -->
+            <div class="elpl-load-more-wrap">
+                <button class="elpl-load-more-btn<?php echo esc_attr($no_more_class); ?>" data-widget="elpl_noticias_generales"
+                    data-grid=".elpl-ng-mobile-more" data-category="<?php echo esc_attr($category_val); ?>"
+                    data-per-page="<?php echo esc_attr($mobile_batch); ?>"
+                    data-offset="<?php echo esc_attr($num_posts_mobile); ?>" data-show-date="no" data-show-excerpt="no"
+                    data-meta-data="<?php echo esc_attr(implode(',', $settings['meta_data'] ?? array())); ?>">
+                    <?php esc_html_e('Cargar más', 'elementor-post-layout'); ?>
+                </button>
+            </div>
+        </div><!-- .elpl-ng-mobile-section -->
+        <?php
     }
 
     /**
