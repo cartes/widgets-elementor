@@ -551,10 +551,10 @@ class ELPL_Noticias_Generales_Widget extends \Elementor\Widget_Base
                                     </div>
                                 </a>
                                 <div class="elpl-ng-content">
+                                    <?php $this->render_meta_data($post); ?>
                                     <h3 class="elpl-ng-title"><a
                                             href="<?php echo esc_url(get_permalink($post->ID)); ?>"><?php echo esc_html($post->post_title); ?></a>
                                     </h3>
-                                    <?php $this->render_meta_data($post); ?>
                                     <?php if ('yes' === $settings['show_excerpt']): ?>
                                         <div class="elpl-ng-excerpt"><?php echo esc_html(wp_trim_words(get_the_excerpt($post->ID), 25)); ?>
                                         </div>
@@ -577,10 +577,10 @@ class ELPL_Noticias_Generales_Widget extends \Elementor\Widget_Base
                                     <img src="<?php echo esc_url($thumb); ?>" alt="<?php echo esc_attr($post->post_title); ?>">
                                 </a>
                                 <div class="elpl-ng-list-content">
+                                    <?php $this->render_meta_data($post); ?>
                                     <h4 class="elpl-ng-title"><a
                                             href="<?php echo esc_url(get_permalink($post->ID)); ?>"><?php echo esc_html($post->post_title); ?></a>
                                     </h4>
-                                    <?php $this->render_meta_data($post); ?>
                                 </div>
                             </div>
                         <?php endforeach;
