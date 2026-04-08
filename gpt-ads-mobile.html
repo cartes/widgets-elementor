@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>GPT Ads - Scripts Centralizados</title>
+
+	<!-- ================================================
+       HEAD: Carga de librería GPT + definición de slots
+       ================================================ -->
+	<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
+	<script>
+		window.googletag = window.googletag || { cmd: [] };
+		googletag.cmd.push(function () {
+
+			// Mobile Home: Leaderboard (350x50)
+			googletag.defineSlot('/18588809/MHMLB_V2', [350, 50], 'div-gpt-ad-1773256848984-0').addService(googletag.pubads());
+
+			// Mobile Home: Medium Rectangle 1 (300x250)
+			googletag.defineSlot('/18588809/MHMMR1_V2', [300, 250], 'div-gpt-ad-1773256892471-0').addService(googletag.pubads());
+
+			// Mobile Home: Medium Rectangle 2 (300x250)
+			googletag.defineSlot('/18588809/MHMMR2_V2', [300, 250], 'div-gpt-ad-1773256929987-0').addService(googletag.pubads());
+
+			// Mobile Home: Medium Rectangle 3 (300x250)
+			googletag.defineSlot('/18588809/MHMMR3_V2', [300, 250], 'div-gpt-ad-1773256979030-0').addService(googletag.pubads());
+
+			// Mobile Home: Medium Rectangle 4
+			googletag.defineSlot('/18588809/MHMMR4_V2', [300, 250], 'div-gpt-ad-1773257023653-0').addService(googletag.pubads());
+
+			// Mobile Home: Medium Rectangle 5
+			googletag.defineSlot('/18588809/MHMMR5_V2', [300, 250], 'div-gpt-ad-1773257068202-0').addService(googletag.pubads());
+
+			// Mobile Home: Footer
+			googletag.defineSlot('/18588809/MHMFSB_V2', [300, 100], 'div-gpt-ad-1773257108707-0').addService(googletag.pubads());
+
+			// Mobile Home: Interstitial
+			googletag.defineSlot('/18588809/MMINTER_V2', [300, 480], 'div-gpt-ad-1773257234346-0').addService(googletag.pubads());
+
+			googletag.pubads().enableSingleRequest();
+			googletag.enableServices();
+		});
+	</script>
+
+</head>
+
+<body>
+
+	<!-- ================================================
+       BODY: Contenedores de anuncios + llamadas display
+       ================================================ -->
+
+	<h1>Mobile Home</h1>
+
+	<!-- Mobile Home: Leaderboard -->
+	<h6 style="font-size:14px;">Leaderboard home mobile</h6>
+	<div id='div-gpt-ad-1773256848984-0' style='min-width: 350px; min-height: 50px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773256848984-0'); });</script>
+	</div>
+
+	<!-- Mobile Home: Medium Rectangle 1 -->
+	<h6 style="font-size:14px;">MR 1</h6>
+	<div id='div-gpt-ad-1773256892471-0' style='min-width: 300px; min-height: 250px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773256892471-0'); });</script>
+	</div>
+
+	<!-- Mobile Home: Medium Rectangle 2 -->
+	<h6 style="font-size:14px;">MR 2</h6>
+	<div id='div-gpt-ad-1773256929987-0' style='min-width: 300px; min-height: 250px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773256929987-0'); });</script>
+	</div>
+
+	<!-- Mobile Home: Medium Rectangle 3 -->
+	<h6 style="font-size:14px;">MR 3</h6>
+	<div id='div-gpt-ad-1773256979030-0' style='min-width: 300px; min-height: 250px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773256979030-0'); });</script>
+	</div>
+
+	<!-- Mobile Home: Medium Rectangle 4 -->
+	<h6 style="font-size:14px;">MR 4</h6>
+	<div id='div-gpt-ad-1773257023653-0' style='min-width: 300px; min-height: 250px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773257023653-0'); });</script>
+	</div>
+
+	<!-- Mobile Home: Medium Rectangle 5 -->
+	<h6 style="font-size:14px;">MR 5</h6>
+	<div id='div-gpt-ad-1773257068202-0' style='min-width: 300px; min-height: 250px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773257068202-0'); });</script>
+	</div>
+
+	<!-- Mobile Home: Footer -->
+	<h6 style="font-size:14px;">Footer home mobile</h6>
+	<div id='div-gpt-ad-1773257108707-0' style='min-width: 300px; min-height: 100px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773257108707-0'); });</script>
+	</div>
+
+	<!-- Mobile Home: Interstitial -->
+	<h6 style="font-size:14px;">Interstitial</h6>
+	<div id='div-gpt-ad-1773257234346-0' style='min-width: 300px; min-height: 480px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773257234346-0'); });</script>
+	</div>
+
+</body>
+
+</html>

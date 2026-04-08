@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>GPT Ads - Scripts Centralizados</title>
+
+	<!-- ================================================
+       HEAD: Carga de librería GPT + definición de slots
+       ================================================ -->
+	<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
+	<script>
+		window.googletag = window.googletag || { cmd: [] };
+		googletag.cmd.push(function () {
+
+			// Leaderboard V2 (700x70)
+			googletag.defineSlot('/18588809/MHLB_V2', [700, 70], 'div-gpt-ad-1773166790210-0').addService(googletag.pubads());
+
+			// Superbillboard 1 (940x250)
+			googletag.defineSlot('/18588809/MHSB1_V2', [940, 250], 'div-gpt-ad-1773166868783-0').addService(googletag.pubads());
+
+			// Billboard 1 (940x170)
+			googletag.defineSlot('/18588809/MHB1_V2', [940, 170], 'div-gpt-ad-1773166946574-0').addService(googletag.pubads());
+
+			// Superbillboard 2 (940x250)
+			googletag.defineSlot('/18588809/MHSB2_V2', [940, 250], 'div-gpt-ad-1773167061622-0').addService(googletag.pubads());
+
+			// Billboard 2 (940x170)
+			googletag.defineSlot('/18588809/MHB2_V2', [940, 170], 'div-gpt-ad-1773167171143-0').addService(googletag.pubads());
+
+			// Superbillboard 3 (940x250)
+			googletag.defineSlot('/18588809/MHSB3_V2', [940, 250], 'div-gpt-ad-1773167243847-0').addService(googletag.pubads());
+
+			// Superbillboard 4 (940x250)
+			googletag.defineSlot('/18588809/MHSB4_V2', [940, 250], 'div-gpt-ad-1773167321850-0').addService(googletag.pubads());
+
+			// Medium Rectangle 1 (228x280)
+			googletag.defineSlot('/18588809/MHMR1_V2', [228, 280], 'div-gpt-ad-1773167379792-0').addService(googletag.pubads());
+
+			// Medium Rectangle 2 (228x280)
+			googletag.defineSlot('/18588809/MHMR2_V2', [228, 280], 'div-gpt-ad-1773167509347-0').addService(googletag.pubads());
+
+			// Medium Rectangle 3 (228x280)
+			googletag.defineSlot('/18588809/MHMR3_V2', [228, 280], 'div-gpt-ad-1773167556789-0').addService(googletag.pubads());
+
+			// Medium Rectangle 4 (228x280)
+			googletag.defineSlot('/18588809/MHMR4_V2', [228, 280], 'div-gpt-ad-1773167630267-0').addService(googletag.pubads());
+
+			// Medium Rectangle 5 (228x280)
+			googletag.defineSlot('/18588809/MHMR5_V2', [228, 280], 'div-gpt-ad-1773167680628-0').addService(googletag.pubads());
+
+			// Footer (940x166)
+			googletag.defineSlot('/18588809/MHFSB_V2', [940, 166], 'div-gpt-ad-1773167742535-0').addService(googletag.pubads());
+
+			// Intersticial (750x550)
+			googletag.defineSlot('/18588809/MHINTER_V2', [750, 550], 'div-gpt-ad-1773168274137-0').addService(googletag.pubads());
+
+			// Sky Izquierdo Superior (120x600)
+			googletag.defineSlot('/18588809/MSKHIS_N', [120, 600], 'div-gpt-ad-1773169118289-0').addService(googletag.pubads());
+
+			// Sky Derecho Superior (120x600)
+			googletag.defineSlot('/18588809/MSKHDS_N', [120, 600], 'div-gpt-ad-1773169228821-0').addService(googletag.pubads());
+
+			// Sky Izquierdo Inferior (120x600)
+			googletag.defineSlot('/18588809/MSKHII_N', [120, 600], 'div-gpt-ad-1773169286436-0').addService(googletag.pubads());
+
+			// Sky Derecho Inferior (120x600)
+			googletag.defineSlot('/18588809/MSKHDI_N', [120, 600], 'div-gpt-ad-1773169343422-0').addService(googletag.pubads());
+
+			// Interiores: Leaderboard (700x70)
+			googletag.defineSlot('/18588809/MILB_V2', [700, 70], 'div-gpt-ad-1773254882617-0').addService(googletag.pubads());
+
+			// Interiores: Medium Rectangle 1 (228x280)
+			googletag.defineSlot('/18588809/MIMR1_V2', [228, 280], 'div-gpt-ad-1773255612957-0').addService(googletag.pubads());
+
+			// Interiores: Top Medium Rectangle (258x215)
+			googletag.defineSlot('/18588809/MITMR_V2', [258, 215], 'div-gpt-ad-1773255694070-0').addService(googletag.pubads());
+
+			// Interiores: Big Rectangle 1 (258x500)
+			googletag.defineSlot('/18588809/MIBR_V2', [258, 500], 'div-gpt-ad-1773255778453-0').addService(googletag.pubads());
+
+			// Interiores: Superbillboard 1 (940x250)
+			googletag.defineSlot('/18588809/MISB1_V2', [940, 250], 'div-gpt-ad-1773255823580-0').addService(googletag.pubads());
+
+			// Interiores: Footer (940x166)
+			googletag.defineSlot('/18588809/MHFSB_V2', [940, 166], 'div-gpt-ad-1773255881401-0').addService(googletag.pubads());
+
+			// Conferencia 1 (300x163)
+			googletag.defineSlot('/18588809/MHCONF1_V2', [300, 163], 'div-gpt-ad-1773256527083-0').addService(googletag.pubads());
+
+			// Conferencia 2 (300x163)
+			googletag.defineSlot('/18588809/MHCONF2_V2', [300, 163], 'div-gpt-ad-1773256576898-0').addService(googletag.pubads());
+
+			// Conferencia 3 (300x163)
+			googletag.defineSlot('/18588809/MHCONF3_V2', [300, 163], 'div-gpt-ad-1773256617173-0').addService(googletag.pubads());
+
+			googletag.pubads().enableSingleRequest();
+			googletag.enableServices();
+		});
+	</script>
+
+</head>
+
+<body>
+
+	<!-- ================================================
+       BODY: Contenedores de anuncios + llamadas display
+       ================================================ -->
+
+	<!-- Leaderboard V2 -->
+	<h6 style="font-size:14px;">Leaderboard V2</h6>
+	<div id='div-gpt-ad-1773166790210-0' style='min-width: 700px; min-height: 70px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773166790210-0'); });</script>
+	</div>
+
+	<!-- Superbillboard 1 -->
+	<h6 style="font-size:14px;">Superbillboard 1</h6>
+	<div id='div-gpt-ad-1773166868783-0' style='min-width: 940px; min-height: 250px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773166868783-0'); });</script>
+	</div>
+
+	<!-- Billboard 1 -->
+	<h6 style="font-size:14px;">Billboard 1</h6>
+	<div id='div-gpt-ad-1773166946574-0' style='min-width: 940px; min-height: 170px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773166946574-0'); });</script>
+	</div>
+
+	<!-- Superbillboard 2 -->
+	<h6 style="font-size:14px;">Superbillboard 2</h6>
+	<div id='div-gpt-ad-1773167061622-0' style='min-width: 940px; min-height: 250px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773167061622-0'); });</script>
+	</div>
+
+	<!-- Billboard 2 -->
+	<h6 style="font-size:14px;">Billboard 2</h6>
+	<div id='div-gpt-ad-1773167171143-0' style='min-width: 940px; min-height: 170px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773167171143-0'); });</script>
+	</div>
+
+	<!-- Superbillboard 3 -->
+	<h6 style="font-size:14px;">Superbillboard 3</h6>
+	<div id='div-gpt-ad-1773167243847-0' style='min-width: 940px; min-height: 250px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773167243847-0'); });</script>
+	</div>
+
+	<!-- Superbillboard 4 -->
+	<h6 style="font-size:14px;">Superbillboard 4</h6>
+	<div id='div-gpt-ad-1773167321850-0' style='min-width: 940px; min-height: 250px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773167321850-0'); });</script>
+	</div>
+
+	<!-- Medium Rectangle 1 -->
+	<h6 style="font-size:14px;">Medium Rectangle 1</h6>
+	<div id='div-gpt-ad-1773167379792-0' style='min-width: 228px; min-height: 280px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773167379792-0'); });</script>
+	</div>
+
+	<!-- Medium Rectangle 2 -->
+	<h6 style="font-size:14px;">Medium Rectangle 2</h6>
+	<div id='div-gpt-ad-1773167509347-0' style='min-width: 228px; min-height: 280px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773167509347-0'); });</script>
+	</div>
+
+	<!-- Medium Rectangle 3 -->
+	<h6 style="font-size:14px;">Medium Rectangle 3</h6>
+	<div id='div-gpt-ad-1773167556789-0' style='min-width: 228px; min-height: 280px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773167556789-0'); });</script>
+	</div>
+
+	<!-- Medium Rectangle 4 -->
+	<h6 style="font-size:14px;">Medium Rectangle 4</h6>
+	<div id='div-gpt-ad-1773167630267-0' style='min-width: 228px; min-height: 280px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773167630267-0'); });</script>
+	</div>
+
+	<!-- Medium Rectangle 5 -->
+	<h6 style="font-size:14px;">Medium Rectangle 5</h6>
+	<div id='div-gpt-ad-1773167680628-0' style='min-width: 228px; min-height: 280px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773167680628-0'); });</script>
+	</div>
+
+	<!-- Footer -->
+	<h6 style="font-size:14px;">Footer</h6>
+	<div id='div-gpt-ad-1773167742535-0' style='min-width: 940px; min-height: 166px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773167742535-0'); });</script>
+	</div>
+
+	<!-- Intersticial -->
+	<h6 style="font-size:14px;">Intersticial</h6>
+	<div id='div-gpt-ad-1773168274137-0' style='min-width: 750px; min-height: 550px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773168274137-0'); });</script>
+	</div>
+
+	<!-- Sky Izquierdo Superior -->
+	<h6 style="font-size:14px;">Sky Izquierdo Superior</h6>
+	<div id='div-gpt-ad-1773169118289-0' style='min-width: 120px; min-height: 600px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773169118289-0'); });</script>
+	</div>
+
+	<!-- Sky Derecho Superior -->
+	<h6 style="font-size:14px;">Sky Derecho Superior</h6>
+	<div id='div-gpt-ad-1773169228821-0' style='min-width: 120px; min-height: 600px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773169228821-0'); });</script>
+	</div>
+
+	<!-- Sky Izquierdo Inferior -->
+	<h6 style="font-size:14px;">Sky Izquierdo Inferior</h6>
+	<div id='div-gpt-ad-1773169286436-0' style='min-width: 120px; min-height: 600px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773169286436-0'); });</script>
+	</div>
+
+	<!-- Sky Derecho Inferior -->
+	<h6 style="font-size:14px;">Sky Derecho Inferior</h6>
+	<div id='div-gpt-ad-1773169343422-0' style='min-width: 120px; min-height: 600px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773169343422-0'); });</script>
+	</div>
+
+	<h1>Interiores</h1>
+
+	<!-- Interiores: Leaderboard -->
+	<h6 style="font-size:14px;">Leaderboard interior</h6>
+	<div id='div-gpt-ad-1773254882617-0' style='min-width: 700px; min-height: 70px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773254882617-0'); });</script>
+	</div>
+
+	<!-- Interiores: Medium Rectangle 1 -->
+	<h6 style="font-size:14px;">Medium rectangle interior 1</h6>
+	<div id='div-gpt-ad-1773255612957-0' style='min-width: 228px; min-height: 280px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773255612957-0'); });</script>
+	</div>
+
+	<!-- Interiores: Top Medium Rectangle -->
+	<h6 style="font-size:14px;">Top medium rectangle</h6>
+	<div id='div-gpt-ad-1773255694070-0' style='min-width: 258px; min-height: 215px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773255694070-0'); });</script>
+	</div>
+
+	<!-- Interiores: Big Rectangle 1 -->
+	<h6 style="font-size:14px;">Big rectangle 1</h6>
+	<div id='div-gpt-ad-1773255778453-0' style='min-width: 258px; min-height: 500px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773255778453-0'); });</script>
+	</div>
+
+	<!-- Interiores: Superbillboard 1 -->
+	<h6 style="font-size:14px;">Superbillboard 1</h6>
+	<div id='div-gpt-ad-1773255823580-0' style='min-width: 940px; min-height: 250px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773255823580-0'); });</script>
+	</div>
+
+	<!-- Interiores: Footer -->
+	<h6 style="font-size:14px;">Footer interior</h6>
+	<div id='div-gpt-ad-1773255881401-0' style='min-width: 940px; min-height: 166px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773255881401-0'); });</script>
+	</div>
+
+	<!-- Conferencia 1 -->
+	<h6 style="font-size:14px;">Conferencia 1</h6>
+	<div id='div-gpt-ad-1773256527083-0' style='min-width: 300px; min-height: 163px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773256527083-0'); });</script>
+	</div>
+
+	<!-- Conferencia 2 -->
+	<h6 style="font-size:14px;">Conferencia 2</h6>
+	<div id='div-gpt-ad-1773256576898-0' style='min-width: 300px; min-height: 163px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773256576898-0'); });</script>
+	</div>
+
+	<!-- Conferencia 3 -->
+	<h6 style="font-size:14px;">Conferencia 3</h6>
+	<div id='div-gpt-ad-1773256617173-0' style='min-width: 300px; min-height: 163px;'>
+		<script>googletag.cmd.push(function () { googletag.display('div-gpt-ad-1773256617173-0'); });</script>
+	</div>
+
+</body>
+
+</html>
